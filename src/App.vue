@@ -6,7 +6,9 @@
       <router-link to="/checkStop">查詢停靠站</router-link> |
       <router-link to="/checkSeats">查詢座位</router-link>
     </div>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 

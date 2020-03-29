@@ -15,6 +15,8 @@ const myAxios = axios.create({
 export default new Vuex.Store({
   state: {
     station: [],
+    trainID: [],
+    trainStopsInfo: {},
   },
   mutations: {
 
@@ -41,6 +43,22 @@ export default new Vuex.Store({
           .catch((error) => {
             reject(error);
           });
+      });
+    },
+    getAllTrainID({ state }) {
+      return new Promise((resolve, reject) => {
+        myAxios.get('/GeneralTimetable?$select=GeneralTimetable')
+          .then((response) => {
+            response.data.forEach((item) => {
+              const trainID = item.GeneralTimetable.GeneralTrainInfo.TrainNo;
+              const stopsInfo = item.GeneralTimetable.StopTimes;
+              state.trainStopsInfo[trainID] = stopsInfo;
+            });
+            resolve(response.data);
+          })
+          .catch((error) => {
+            reject(error);
+          })
       });
     },
   },
