@@ -13,8 +13,12 @@
       </el-form-item>
       <el-form-item label="艙位">
         <el-checkbox-group v-model="seatTypeSelected">
-          <el-checkbox label="經濟艙"></el-checkbox>
-          <el-checkbox label="商務艙"></el-checkbox>
+          <el-checkbox label="經濟艙">
+            <i class="el-icon-user-solid">經濟艙</i>
+          </el-checkbox>
+          <el-checkbox label="商務艙">
+            <i class="el-icon-s-goods">商務艙</i>
+          </el-checkbox>
         </el-checkbox-group>
         <span v-show="seatTypeSelected.length < 1">至少選擇一種唷！</span>
       </el-form-item>

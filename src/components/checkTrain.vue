@@ -17,7 +17,8 @@
             v-for="item in $store.state.station"
             :key="item.StationID"
             :label="item.StationName.Zh_tw"
-            :value="item.StationID">
+            :value="item.StationID"
+            :disabled="item.StationID === departureStation">
           </el-option>
         </el-select>
       </el-form-item>
@@ -33,30 +34,20 @@
         </el-date-picker>
       </el-form-item>
       <el-form-item label="出發時間">
-        <el-time-select
+        <el-time-picker
+          format="HH:mm"
+          value-format="HH:mm"
           v-model="departureTime"
-          :editable="false"
-          :clearable="false"
-          :picker-options="{
-            start: startTimeOption,
-            step: '00:30',
-            end: '23:30'
-          }"
-          placeholder="选择时间">
-        </el-time-select>
+          placeholder="選擇時間">
+        </el-time-picker>
       </el-form-item>
       <el-form-item label="抵達時間">
-        <el-time-select
+        <el-time-picker
+          format="HH:mm"
+          value-format="HH:mm"
           v-model="arrivalTime"
-          :editable="false"
-          :clearable="false"
-          :picker-options="{
-            start: startTimeOption,
-            step: '00:30',
-            end: '23:30'
-          }"
-          placeholder="选择时间">
-        </el-time-select>
+          placeholder="選擇時間">
+        </el-time-picker>
       </el-form-item>
       <el-button
         type="primary"
@@ -89,12 +80,11 @@ export default {
     pickerOption: {
       disabledDate(date) {
         const now = new Date();
-        // 已過日期不能選
-        return date < now - 86400000 * 1;
+        // 只能選 T ~ T+26
+        return date < now - 86400000 * 1 || date - now > 86400000 * 26;
       },
     },
     result: [],
-    startTimeOption: '',
     loading: false,
   }),
   methods: {
@@ -126,17 +116,6 @@ export default {
   created() {
     const d = new Date();
     this.departureDate = `${d.getFullYear()}-${this.prepandZero(d.getMonth() + 1)}-${this.prepandZero(d.getDate())}`;
-
-    let hour = d.getHours();
-    let min = d.getMinutes();
-    if (min > 30) {
-      min = '0';
-      hour += 1;
-    } else {
-      min = '30';
-    }
-    this.startTimeOption = `${this.prepandZero(hour)}:${this.prepandZero(min)}`;
-    this.endTimeOption = `${this.prepandZero(hour + 24)}:${this.prepandZero(min)}`;
   },
 };
 </script>

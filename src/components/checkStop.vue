@@ -13,6 +13,7 @@
       </el-form-item>
       <el-button
         type="primary"
+        :disabled="btnDisabled"
         @click="getStops">
         查詢停靠站
       </el-button>
@@ -40,6 +41,9 @@ export default {
     allTrainID() {
       if (!this.isCreated) return null;
       return Object.keys(this.trainStopsInfo);
+    },
+    btnDisabled() {
+      return !this.trainIDSelected;
     },
   },
   created() {
