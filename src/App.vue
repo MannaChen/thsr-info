@@ -1,14 +1,21 @@
 <template>
   <div id="app">
     <h1>高鐵即時資料查詢</h1>
-    <div id="nav">
-      <router-link to="/checkTrain">查詢車次</router-link> |
-      <router-link to="/checkStop">查詢停靠站</router-link> |
-      <router-link to="/checkSeats">查詢座位</router-link>
-    </div>
-    <keep-alive>
-      <router-view />
-    </keep-alive>
+    <nav>
+      <router-link
+        v-for="link in routerLinks" :key="link.id"
+        :to="link.path"
+        @click.native="routerActiveIndex = link.id"
+      >
+        {{ link.label }}
+      </router-link>
+      <div class="active-bar" :style="activeBarStyle"></div>
+    </nav>
+    <main>
+      <keep-alive>
+        <router-view />
+      </keep-alive>
+    </main>
   </div>
 </template>
 
@@ -16,7 +23,21 @@
 
 export default {
   data: () => ({
+    routerActiveIndex: 0,
+    routerLinks: [
+      { id: 0, path: '/checkTrain', label: '查詢車次' },
+      { id: 1, path: '/checkStop', label: '查詢停靠站' },
+      { id: 2, path: '/checkSeats', label: '查詢座位' },
+    ],
   }),
+  computed: {
+    activeBarStyle() {
+      return {
+        width: `${100 / this.routerLinks.length}%`,
+        left: `${(100 / this.routerLinks.length) * this.routerActiveIndex}%`,
+      };
+    },
+  },
   created() {
     this.$store.dispatch('getStations');
   },
@@ -24,25 +45,6 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', 'Microsoft JhengHei',Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  padding: 20px;
-  h1 {
-    margin: 0 0 20px 0;
-  }
-}
+@import '@/assets/scss/components/app.scss';
 
-#nav {
-  margin-bottom: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

@@ -1,9 +1,19 @@
 @import './reset.scss';
 
-* {
-  // outline: 1px solid red !important;
+$main-color: #e74e3d;
+
+.result {
+  p {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
-h2 {
-  font-size: 18px;
+input {
+  // 防止ios在focus時將畫面放大
+  font-size: 16px;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: #fcfcfc;
 }

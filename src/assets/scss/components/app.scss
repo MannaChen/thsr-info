@@ -1,0 +1,55 @@
+html, body {
+  background-color: #f0f0f0;
+}
+
+#app {
+  font-family: 'Avenir', 'Microsoft JhengHei',Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0;
+  h1 {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    line-height: 48px;
+    font-size: 20px;
+    padding-left: 20px;
+    background-color: $main-color;
+    color: #fff;
+  }
+}
+
+nav {
+  position: sticky;
+  top: 48px;
+  display: flex;
+  padding-top: 8px;
+  background-color: #f0f0f0;
+  max-width: 600px;
+  a {
+    flex: 1;
+    line-height: 2;
+    text-align: center;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    color: $main-color;
+    opacity: 0.8;
+    transition: opacity .3s ease;
+    &.router-link-exact-active {
+      opacity: 1;
+    }
+  }
+  .active-bar {
+    height: 3px;
+    background-color: $main-color;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: left .3s ease-in-out;
+  }
+}
+
+main {
+  padding: 30px 20px 20px 20px;
+}
