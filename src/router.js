@@ -8,6 +8,10 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      redirect: '/checkTrain',
+    },
+    {
       path: '/checkTrain',
       component: () => import('./components/checkTrain.vue'),
     },

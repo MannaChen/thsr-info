@@ -16,6 +16,7 @@
           <el-checkbox label="經濟艙"></el-checkbox>
           <el-checkbox label="商務艙"></el-checkbox>
         </el-checkbox-group>
+        <span v-show="seatTypeSelected.length < 1">至少選擇一種唷！</span>
       </el-form-item>
     </el-form>
     <el-button
@@ -29,15 +30,18 @@
       :class="[{'show-standard': seatTypeSelected.includes('經濟艙')},
       {'show-business': seatTypeSelected.includes('商務艙')}]"
     >
-      <el-tooltip placement="top">
-        <div class="result-desc" slot="content">
-          <span class="text-normal">正常</span>
-          <span class="text-warning">有限</span>
-          <span class="text-alert">售罄</span>
-        </div>
-        <i class="el-icon-warning-outline"></i>
-      </el-tooltip>
-      <el-table :data="tableData" stripe max-height="300">
+      <p>
+        共 {{ tableData.length }} 個車次
+        <el-tooltip placement="top">
+          <div class="result-desc" slot="content">
+            <span class="text-normal">正常</span>
+            <span class="text-warning">有限</span>
+            <span class="text-alert">售罄</span>
+          </div>
+          <i class="el-icon-warning-outline"></i>
+        </el-tooltip>
+      </p>
+      <el-table v-loading="loading" :data="tableData" stripe max-height="300">
         <el-table-column fixed prop="trainId" label="車次" width="60" />
         <el-table-column fixed prop="departureTime" label="出發時間" width="80" />
         <el-table-column
