@@ -9,8 +9,11 @@ Vue.use(Vuex);
 const myAxios = axios.create({
   baseURL: 'https://ptx.transportdata.tw/MOTC/v2/Rail/THSR/',
   timeout: 5000,
-  headers: getAuthorizationHeader(),
 });
+
+const axiosConfig = {
+  headers: getAuthorizationHeader(),
+};
 
 export default new Vuex.Store({
   state: {
@@ -23,7 +26,7 @@ export default new Vuex.Store({
   actions: {
     getStations({ state }) {
       return new Promise((resolve, reject) => {
-        myAxios.get('/Station')
+        myAxios.get('/Station', axiosConfig)
           .then((response) => {
             state.station = response.data;
             resolve();
@@ -35,7 +38,7 @@ export default new Vuex.Store({
     },
     getTrains(context, payload) {
       return new Promise((resolve, reject) => {
-        myAxios.get(`/DailyTimeTable/OD/${payload.departureStation}/to/${payload.arrivalStation}/${payload.departureDate}`)
+        myAxios.get(`/DailyTimeTable/OD/${payload.departureStation}/to/${payload.arrivalStation}/${payload.departureDate}`, axiosConfig)
           .then((response) => {
             resolve(response);
           })
@@ -46,7 +49,7 @@ export default new Vuex.Store({
     },
     getSeats(context, payload) {
       return new Promise((resolve, reject) => {
-        myAxios.get(`AvailableSeatStatusList/${payload.stationId}`)
+        myAxios.get(`AvailableSeatStatusList/${payload.stationId}`, axiosConfig)
           .then((response) => {
             resolve(response);
           })
@@ -57,7 +60,7 @@ export default new Vuex.Store({
     },
     getAllTrainID() {
       return new Promise((resolve, reject) => {
-        myAxios.get('/GeneralTimetable?$select=GeneralTimetable')
+        myAxios.get('/GeneralTimetable?$select=GeneralTimetable', axiosConfig)
           .then((response) => {
             const trainStopsInfo = {};
             response.data.forEach((item) => {
