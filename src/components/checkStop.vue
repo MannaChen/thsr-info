@@ -2,7 +2,7 @@
   <div>
     <el-form label-position="left" label-width="70px">
       <el-form-item required label="車次ID">
-        <el-select v-model="trainID" filterable placeholder="请选择">
+        <el-select v-model="trainIDSelected" filterable placeholder="请选择">
           <el-option
             v-for="item in allTrainID"
             :key="item"
@@ -29,24 +29,28 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   data: () => ({
-    trainID: '',
+    trainIDSelected: '',
+    trainStopsInfo: {},
     result: [],
+    isCreated: false,
   }),
   computed: {
-    ...mapState({
-      allTrainID: state => Object.keys(state.trainStopsInfo),
-    }),
+    allTrainID() {
+      if (!this.isCreated) return null;
+      return Object.keys(this.trainStopsInfo);
+    },
   },
   created() {
-    this.$store.dispatch('getAllTrainID');
+    this.$store.dispatch('getAllTrainID').then((res) => {
+      this.isCreated = true;
+      this.trainStopsInfo = res;
+    });
   },
   methods: {
     getStops() {
-      this.result = this.$store.state.trainStopsInfo[this.trainID];
+      this.result = this.trainStopsInfo[this.trainIDSelected];
     },
   },
 };
