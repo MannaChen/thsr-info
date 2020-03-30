@@ -45,6 +45,17 @@ export default new Vuex.Store({
           });
       });
     },
+    getSeats(context, payload) {
+      return new Promise((resolve, reject) => {
+        myAxios.get(`AvailableSeatStatusList/${payload.stationId}`)
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
     getAllTrainID({ state }) {
       return new Promise((resolve, reject) => {
         myAxios.get('/GeneralTimetable?$select=GeneralTimetable')

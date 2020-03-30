@@ -15,5 +15,9 @@ export default new Router({
       path: '/checkStop',
       component: () => import('./components/checkStop.vue'),
     },
+    {
+      path: '/checkSeats',
+      component: () => import('./components/checkSeats.vue'),
+    },
   ],
 });
