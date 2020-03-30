@@ -19,11 +19,11 @@
     </el-form>
     <section class="result">
       <p>共 {{ result.length }} 個停靠站</p>
-      <div v-for="item in result" :key="item.StopSequence">
-        <span>{{ item.StopSequence }}：{{ item.StationName.Zh_tw }}，</span>
-        <span>離開時間 {{ item.DepartureTime }}，</span>
-        <hr>
-      </div>
+      <el-table :data="result" stripe max-height="300">
+        <el-table-column type="index" />
+        <el-table-column prop="StationName.Zh_tw" label="停靠站" />
+        <el-table-column prop="DepartureTime" label="離開時間" />
+      </el-table>
     </section>
   </div>
 </template>

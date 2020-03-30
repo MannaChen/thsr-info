@@ -68,12 +68,12 @@
     </el-form>
     <section class="result">
       <p>共 {{ result.length }} 筆結果</p>
-      <div v-for="item in result" :key="item.DailyTrainInfo.TrainNo">
-        <span>車次：{{ item.DailyTrainInfo.TrainNo }}，</span>
-        <span>出發：{{ item.OriginStopTime.DepartureTime }}，</span>
-        <span>抵達：{{ item.DestinationStopTime.ArrivalTime }}</span>
-        <hr>
-      </div>
+      <el-table :data="result" stripe max-height="300">
+        <el-table-column type="index" />
+        <el-table-column prop="DailyTrainInfo.TrainNo" label="車次" />
+        <el-table-column prop="OriginStopTime.DepartureTime" label="出發" />
+        <el-table-column prop="DestinationStopTime.ArrivalTime" label="抵達" />
+      </el-table>
     </section>
   </div>
 </template>
