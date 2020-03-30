@@ -6,16 +6,37 @@ $main-color: #e74e3d;
   p {
     font-size: 14px;
     text-align: center;
+    color: rgb(144, 147, 153);
   }
 }
 
-input {
-  // 防止ios在focus時將畫面放大
-  font-size: 14px !important;
+// 防止ios在focus時將畫面放大
+@media (max-width: 600px) {
+  input {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 601px) {
+  .el-form {
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .el-form {
-  padding: 20px;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 30px 20px 20px 20px;
+  .el-select, .el-date-editor {
+    width: 100%;
+  }
+  .el-button {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 .el-table--striped .el-table__body tr.el-table__row--striped td {
   background-color: #fcfcfc;
