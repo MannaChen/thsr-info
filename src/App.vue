@@ -2,14 +2,16 @@
   <div id="app">
     <h1>高鐵即時資料查詢</h1>
     <nav>
-      <router-link
-        v-for="link in routerLinks" :key="link.id"
-        :to="link.path"
-        @click.native="routerActiveIndex = link.id"
-      >
-        {{ link.label }}
-      </router-link>
-      <div class="active-bar" :style="activeBarStyle"></div>
+      <div class="router-wrapper">
+        <router-link
+          v-for="link in routerLinks" :key="link.id"
+          :to="link.path"
+          @click.native="routerActiveIndex = link.id"
+        >
+          {{ link.label }}
+        </router-link>
+        <div class="active-bar" :style="activeBarStyle"></div>
+      </div>
     </nav>
     <main>
       <keep-alive>

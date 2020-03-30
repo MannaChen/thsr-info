@@ -36,6 +36,8 @@ i.el-icon-warning-outline {
 }
 
 .result-desc {
+  box-sizing: border-box;
+  display: flex;
   .text-normal, .text-warning, .text-alert {
     position: relative;
     font-size: 12px;

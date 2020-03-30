@@ -68,7 +68,7 @@
     </el-form>
     <section class="result">
       <p>共 {{ result.length }} 筆結果</p>
-      <el-table v-loading="loading" :data="result" stripe max-height="300">
+      <el-table v-loading="loading" :data="result" stripe max-height="500">
         <el-table-column type="index" />
         <el-table-column prop="DailyTrainInfo.TrainNo" label="車次" />
         <el-table-column prop="OriginStopTime.DepartureTime" label="出發" />

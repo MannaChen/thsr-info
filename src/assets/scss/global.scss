@@ -11,9 +11,12 @@ $main-color: #e74e3d;
 
 input {
   // 防止ios在focus時將畫面放大
-  font-size: 16px;
+  font-size: 14px !important;
 }
 
+.el-form {
+  padding: 20px;
+}
 .el-table--striped .el-table__body tr.el-table__row--striped td {
   background-color: #fcfcfc;
 }

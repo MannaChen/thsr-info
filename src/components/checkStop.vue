@@ -19,7 +19,7 @@
     </el-form>
     <section class="result">
       <p>共 {{ result.length }} 個停靠站</p>
-      <el-table :data="result" stripe max-height="300">
+      <el-table :data="result" stripe max-height="500">
         <el-table-column type="index" />
         <el-table-column prop="StationName.Zh_tw" label="停靠站" />
         <el-table-column prop="DepartureTime" label="離開時間" />
